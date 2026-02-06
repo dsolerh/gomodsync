@@ -1,4 +1,4 @@
-module gomodsync
+module github.com/dsolerh/gomodsync
 
 go 1.24.1
 
