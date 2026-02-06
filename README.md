@@ -1,6 +1,15 @@
 # gomodsync - Go Module Version Comparator and Sync Tool
 
+[![CI](https://github.com/dsolerh/gomodsync/workflows/CI/badge.svg)](https://github.com/dsolerh/gomodsync/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dsolerh/gomodsync)](https://goreportcard.com/report/github.com/dsolerh/gomodsync)
+[![codecov](https://codecov.io/gh/dsolerh/gomodsync/branch/main/graph/badge.svg)](https://codecov.io/gh/dsolerh/gomodsync)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Go Reference](https://pkg.go.dev/badge/github.com/dsolerh/gomodsync.svg)](https://pkg.go.dev/github.com/dsolerh/gomodsync)
+[![Release](https://img.shields.io/github/release/dsolerh/gomodsync.svg)](https://github.com/dsolerh/gomodsync/releases/latest)
+
 A command-line tool that compares and synchronizes dependency versions between two `go.mod` files.
+
+> **Note**: Replace `dsolerh` in the badges above with your GitHub username/organization.
 
 ## Features
 
@@ -248,3 +257,32 @@ fi
 - **check (strict)**: Also reports dependencies that exist only in target
 - File permissions are preserved when syncing
 - Original structure and comments are maintained
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
+- Reporting bugs
+- Suggesting features
+- Submitting pull requests
+- Development setup
+- Code style guidelines
+
+## Security
+
+For security concerns, please see [SECURITY.md](SECURITY.md) for our security policy and how to report vulnerabilities.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+- **Documentation**: Check this README and related docs
+- **Issues**: [GitHub Issues](https://github.com/dsolerh/gomodsync/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/dsolerh/gomodsync/discussions)
+
+## Acknowledgments
+
+Built with Go and the following excellent libraries:
+- [golang.org/x/mod](https://pkg.go.dev/golang.org/x/mod) - Go module file parsing
+- [testify](https://github.com/stretchr/testify) - Testing toolkit

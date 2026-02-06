@@ -1,0 +1,75 @@
+run:
+  timeout: 5m
+  tests: true
+  build-tags: []
+
+linters:
+  enable:
+    - errcheck      # Check for unchecked errors
+    - gosimple      # Simplify code
+    - govet         # Vet examines Go source code
+    - ineffassign   # Detect ineffectual assignments
+    - staticcheck   # Go static analysis
+    - unused        # Check for unused code
+    - gofmt         # Check formatting
+    - goimports     # Check imports
+    - misspell      # Fix commonly misspelled words
+    - revive        # Fast, configurable linter
+    - gosec         # Security checks
+    - gocritic      # Go code review
+    - gocyclo       # Cyclomatic complexity
+    - dupl          # Code clone detection
+    - unparam       # Unused function parameters
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+  govet:
+    check-shadowing: true
+    enable-all: true
+
+  gocyclo:
+    min-complexity: 15
+
+  dupl:
+    threshold: 100
+
+  gocritic:
+    enabled-checks:
+      - appendAssign
+      - assignOp
+      - boolExprSimplify
+      - captLocal
+      - commentFormatting
+      - deprecatedComment
+      - dupImport
+      - emptyStringTest
+      - exitAfterDefer
+      - ifElseChain
+      - methodExprCall
+      - nilValReturn
+      - regexpMust
+      - singleCaseSwitch
+      - stringXbytes
+      - unlambda
+      - unnamedResult
+
+  gosec:
+    excludes:
+      - G107 # We allow HTTP requests with variable URLs (CLI tool)
+
+issues:
+  exclude-rules:
+    # Exclude some linters from running on tests files
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec
+        - gocritic
+
+  max-issues-per-linter: 0
+  max-same-issues: 0
