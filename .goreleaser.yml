@@ -1,5 +1,7 @@
 version: 2
 
+project_name: gomodsync
+
 before:
   hooks:
     - go mod tidy
@@ -26,7 +28,6 @@ builds:
 
 archives:
   - id: default
-    format: tar.gz
     name_template: >-
       {{ .ProjectName }}_
       {{- .Version }}_
@@ -34,6 +35,7 @@ archives:
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
     format_overrides:
       - goos: windows
         format: zip
@@ -55,7 +57,5 @@ changelog:
 
 release:
   github:
-    owner: "{{ .Env.GITHUB_REPOSITORY_OWNER }}"
-    name: "{{ .ProjectName }}"
-  name_template: "{{.ProjectName}} {{.Version}}"
+  name_template: "v{{.Version}}"
   draft: false
