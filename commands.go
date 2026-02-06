@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+//nolint:gocyclo // Command handler naturally has high complexity
 func syncCommand(args []string) {
 	fs := flag.NewFlagSet("sync", flag.ExitOnError)
 	targetFile := fs.String("target", "", "Path to the target go.mod file to be modified")
@@ -14,8 +15,8 @@ func syncCommand(args []string) {
 	dryRun := fs.Bool("dry-run", false, "Show changes without modifying the target file")
 	verbose := fs.Bool("verbose", false, "Show detailed changes")
 
-	// no need to check for errors cause the flagset is configured with flag.ExitOnError
-	_ = fs.Parse(args)
+	// ExitOnError flag handles parse errors automatically
+	_ = fs.Parse(args) //nolint:errcheck // ExitOnError handles this
 
 	if *targetFile == "" || *referenceFile == "" {
 		fmt.Println("Usage: gomodsync sync -target <target-go.mod> -reference <reference-go.mod|URL> [-dry-run] [-verbose]")
@@ -89,11 +90,11 @@ func syncCommand(args []string) {
 		if *verbose {
 			fmt.Println("\nPreview of updated go.mod:")
 			fmt.Println("---")
-			formatted, err := targetMod.Format()
-			if err != nil {
-				log.Fatalf("Failed to format target file: %v", err)
+			previewData, fmtErr := targetMod.Format()
+			if fmtErr != nil {
+				log.Fatalf("Failed to format target file: %v", fmtErr)
 			}
-			fmt.Println(string(formatted))
+			fmt.Println(string(previewData))
 		}
 		return
 	}
@@ -119,8 +120,8 @@ func checkCommand(args []string) {
 	strict := fs.Bool("strict", false, "Fail if target has dependencies not in reference")
 	verbose := fs.Bool("verbose", false, "Show detailed version mismatches")
 
-	// no need to check for errors cause the flagset is configured with flag.ExitOnError
-	_ = fs.Parse(args)
+	// ExitOnError flag handles parse errors automatically
+	_ = fs.Parse(args) //nolint:errcheck // ExitOnError handles this
 
 	if *targetFile == "" || *referenceFile == "" {
 		fmt.Println("Usage: gomodsync check -target <target-go.mod> -reference <reference-go.mod|URL> [-strict] [-verbose]")

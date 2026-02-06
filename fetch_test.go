@@ -62,7 +62,7 @@ func TestFetchFromURL(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// Create a test server
-			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 				w.WriteHeader(tt.responseStatus)
 				_, _ = w.Write([]byte(tt.responseBody))
 			}))
@@ -102,7 +102,7 @@ func TestFetchReference_URL(t *testing.T) {
 	expectedContent := "module example.com/test\n\ngo 1.21\n"
 
 	// Create a test server
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(expectedContent))
 	}))

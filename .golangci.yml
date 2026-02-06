@@ -27,8 +27,12 @@ linters-settings:
     check-blank: true
 
   govet:
-    check-shadowing: true
     enable-all: true
+    settings:
+      shadow:
+        strict: false
+    disable:
+      - fieldalignment  # Don't worry about struct field alignment
 
   gocyclo:
     min-complexity: 15
@@ -37,23 +41,11 @@ linters-settings:
     threshold: 100
 
   gocritic:
-    enabled-checks:
-      - appendAssign
-      - assignOp
-      - boolExprSimplify
-      - captLocal
-      - commentFormatting
-      - deprecatedComment
-      - dupImport
-      - emptyStringTest
-      - exitAfterDefer
-      - ifElseChain
-      - methodExprCall
-      - nilValReturn
-      - regexpMust
-      - singleCaseSwitch
-      - stringXbytes
-      - unlambda
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+    disabled-checks:
       - unnamedResult
 
   gosec:
